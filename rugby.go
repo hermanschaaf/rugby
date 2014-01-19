@@ -104,14 +104,30 @@ func ScoringCombinations(score int) (combinations [][3]int) {
 	}
 }
 
-func main() {
-	// calculateMinimumScoringOps(150)
-	// for i := 0; i < len(scoreOps); i++ {
-	// 	fmt.Println(i, scoreOps[i])
-	// }
+// NumScoringCombinations returns only the number of combinations
+// possible for a certain score.
+func NumScoringCombinations(score int) int {
+	return len(ScoringCombinations(score))
+}
 
-	calculateScoringCombinations(50)
+func main() {
+	// calculate and print MinimumScoringOps up to 1000
+	calculateMinimumScoringOps(1000)
+	for i := 0; i < len(scoreOps); i++ {
+		fmt.Printf("%d\t%d\n", i, scoreOps[i])
+	}
+
+	// calculate and print NumScoringCombinations up to 150
+	fmt.Println(NumScoringCombinations(150))
 	for i := 0; i < len(scoreCombinations); i++ {
-		fmt.Println(i, scoreCombinations[i])
+		for u, score := range scoreCombinations[i] {
+			if u == 0 {
+				fmt.Printf("%d\t", i)
+			} else {
+				fmt.Print("\t")
+			}
+			fmt.Print(fmt.Sprintf("%d\t%d\t%d", score[0], score[1], score[2]))
+			fmt.Print("\n")
+		}
 	}
 }
